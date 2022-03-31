@@ -45,6 +45,7 @@ server {
 - Error handling in the login system
 - Apply regex verifications on the text inputs
 - Overall appearance of the application
+- Appearance of the e-mail template
 
 ### License
 
