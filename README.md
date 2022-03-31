@@ -12,6 +12,12 @@ All the project dependencies are in the files `package.json` and `composer.json`
 
 After cloning this project, copy file `.env.example` to a file with the name `.env` and fill all the environment variables with the correct data.
 
+### TODO
+
+- Error handling in the login system
+- Apply regex verifications on the text inputs
+- Overall appearance of the application
+
 ### License
 
 This project is under the [GPL-3.0 license](https://www.gnu.org/licenses/gpl-3.0.en.html).
