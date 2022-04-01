@@ -18,7 +18,6 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.11.4",
-        "ajax": "^0.0.4",
         "bootstrap": "^5.1.3",
         "jquery": "^3.6.0",
         "style-loader": "^3.3.1"
