@@ -78,7 +78,7 @@
 
                                 <div class="col-md-6">
                                     <label for="or" class="form-label">Ordem de serviço</label>
-                                    <input type="or" class="form-control" id="or" placeholder="00000" name="or" value="00000">
+                                    <input type="or" class="form-control" id="or" placeholder="00000" name="or" value="00000" pattern="^[\d]{1,10}">
                                     <div class="invalid-feedback">
                                         Por favor, insira uma ordem de serviço válida.
                                     </div>
