@@ -25,7 +25,7 @@ try {
 
     //Recipients
     $mail->setFrom($_ENV["MAIL_FROM_ADDRESS"], $_ENV["MAIL_FROM_NAME"]);
-    $mail->addAddress('oficina@meiricarro.com');
+    $mail->addAddress($_ENV["MAIL_TO_ADDRESS"], $_ENV["MAIL_TO_NAME"]);
 
     //Content
     $mail->isHTML(true);

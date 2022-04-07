@@ -14,6 +14,8 @@
     $dotenv->required('MAIL_PASSWORD')->notEmpty();
     $dotenv->required('MAIL_FROM_ADDRESS')->notEmpty();
     $dotenv->required('MAIL_FROM_NAME')->notEmpty();
+    $dotenv->required('MAIL_TO_ADDRESS')->notEmpty();
+    $dotenv->required('MAIL_TO_NAME')->notEmpty();
 
     session_start();
 
