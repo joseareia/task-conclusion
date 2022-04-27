@@ -2,6 +2,15 @@
 
 PHP application to notify via e-mail if a certain task is complete.
 
+### Installation
+
+In order to use this project you just need to install npm and composer dependencies.
+
+```shell
+$ npm i
+$ composer install
+```
+
 ### Dependencies
 
 **Note**: Please make sure that you have `npm` and `composer` properly installed in your machine.
