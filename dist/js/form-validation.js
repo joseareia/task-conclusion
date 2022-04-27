@@ -12,7 +12,6 @@ $(document).ready(function() {
                     $('#submitBtn').addClass('disabled');
                     $('#submitBtn').text(' A enviar...');
                     $('#submitBtn').prepend("<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>");
-                    pending = true;
                     $.ajax({
                         method: 'POST',
                         url: 'send-mail.php',
