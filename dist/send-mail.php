@@ -26,6 +26,7 @@ try {
     //Recipients
     $mail->setFrom($_ENV["MAIL_FROM_ADDRESS"], $_ENV["MAIL_FROM_NAME"]);
     $mail->addAddress($_ENV["MAIL_TO_ADDRESS"], $_ENV["MAIL_TO_NAME"]);
+    $mail->addCC($_ENV["MAIL_TO_ADDRESS_CC"]);
 
     //Content
     $mail->isHTML(true);
