@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    var pending;
-
     $('#submitBtn').unbind().bind('click', function(e) {
         let formData = $('#form').serialize();
         let forms = document.querySelectorAll('.needs-validation');
@@ -8,7 +6,6 @@ $(document).ready(function() {
         Array.prototype.slice.call(forms).forEach(function(form) {
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
-                if (pending) return;
                 if (!form.checkValidity()) {
                     event.stopPropagation();
                 } else {
@@ -29,7 +26,7 @@ $(document).ready(function() {
                                 alert("Erro no envio do registo.\nCode: " + response['code'] + "\nInfo: " + response['message']);
                             }
                             clean();
-                            pending = false;
+                            window.location.reload();
                         }
                     });
                 }
