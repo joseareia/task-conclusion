@@ -36,7 +36,7 @@
                 <div class="row g-5">
                     <div class="col-md-12 col-lg-12">
                         <h4 class="mb-4">Registo de conclusão de tarefas</h4>
-                        <form class="needs-validation" novalidate action="send-mail.php" method="POST" id="form">
+                        <form class="needs-validation" novalidate method="POST" id="form">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="colaborador" class="form-label">Colaborador</label>
@@ -59,7 +59,7 @@
                                     <label for="tarefa" class="form-label">Tarefa</label>
                                     <select class="form-select" id="tarefa" required name="tarefa">
                                         <option value="" hidden disabled selected>Escolha uma tarefa...</option>
-                                        <option value="Intervenções Técnicos">Intervenções Técnicas</option>
+                                        <option value="Intervenções Técnicas">Intervenções Técnicas</option>
                                         <option value="Lavagem">Lavagem</option>
                                         <option value="Inspeção">Inspeção</option>
                                     </select>
