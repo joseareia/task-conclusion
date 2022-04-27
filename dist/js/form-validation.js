@@ -1,30 +1,35 @@
 $(document).ready(function() {
-    $('#submitBtn').click(function(e) {
+    var pending;
+
+    $('#submitBtn').unbind().bind('click', function(e) {
         let formData = $('#form').serialize();
         let forms = document.querySelectorAll('.needs-validation');
 
         Array.prototype.slice.call(forms).forEach(function(form) {
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
+                if (pending) return;
                 if (!form.checkValidity()) {
                     event.stopPropagation();
                 } else {
                     $('#submitBtn').addClass('disabled');
                     $('#submitBtn').text(' A enviar...');
                     $('#submitBtn').prepend("<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>");
+                    pending = true;
                     $.ajax({
                         method: 'POST',
                         url: 'send-mail.php',
+                        cache: false,
                         data: formData,
                         success: function(data) {
                             let response = JSON.parse(data);
                             if (response['code'] === 200) {
                                 alert("Registo enviado com sucesso.");
-                                clean();
                             } else {
                                 alert("Erro no envio do registo.\nCode: " + response['code'] + "\nInfo: " + response['message']);
-                                clean();
                             }
+                            clean();
+                            pending = false;
                         }
                     });
                 }
