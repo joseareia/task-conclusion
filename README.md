@@ -2,6 +2,12 @@
 
 PHP application to notify via e-mail if a certain task is complete.
 
+### Dependencies
+
+**Note**: Please make sure that you have `npm` and `composer` properly installed in your machine.
+
+All the project dependencies are in the files `package.json` and `composer.json`.
+
 ### Installation
 
 In order to use this project you just need to install npm and composer dependencies.
@@ -10,12 +16,6 @@ In order to use this project you just need to install npm and composer dependenc
 $ npm i
 $ composer install
 ```
-
-### Dependencies
-
-**Note**: Please make sure that you have `npm` and `composer` properly installed in your machine.
-
-All the project dependencies are in the files `package.json` and `composer.json`.
 
 ### Usage
 
