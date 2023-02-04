@@ -1,16 +1,16 @@
 <?php
-    require 'app.php';
+require 'app.php';
 
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\SMTP;
-    use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-    $mail = new PHPMailer(true);
+$mail = new PHPMailer(true);
 
-    $subject = $_POST['tarefa']." concluída(os) - OSV ".$_POST['or']." Viatura ".$_POST['matricula'];
-    $body = "A Tarefa <b>".$_POST['tarefa']."</b> da OSV <b>".$_POST['or']."</b> da Viatura <b>".$_POST['matricula']."</b> foi concluída por <b>".$_POST['colaborador']."</b>.";
+$subject = $_POST['tarefa']." concluída(os) - OSV ".$_POST['or']." Viatura ".$_POST['matricula'];
+$body = "A Tarefa <b>".$_POST['tarefa']."</b> da OSV <b>".$_POST['or']."</b> da Viatura <b>".$_POST['matricula']."</b> foi concluída por <b>".$_POST['colaborador']."</b>.";
 
-    $response = array();
+$response = array();
 
 try {
     $mail->isSMTP();

@@ -4,9 +4,8 @@
     $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
     $dotenv->safeLoad();
 
-    $dotenv->required('HASH_TYPE')->notEmpty();
-    $dotenv->required('HASH_USER')->notEmpty();
-    $dotenv->required('HASH_PASSWORD')->notEmpty();
+    $dotenv->required('USERNAME')->notEmpty();
+    $dotenv->required('PASSWORD')->notEmpty();
     $dotenv->required('MAIL_MAILER')->notEmpty();
     $dotenv->required('MAIL_HOST')->notEmpty();
     $dotenv->required('MAIL_PORT')->notEmpty();
@@ -35,19 +34,20 @@
         }
     }
 
-    function login(string $username, string $password) :bool {
-        $hashed_user_given = hash($_ENV['HASH_TYPE'], $username);
-        $hashed_pass_given = hash($_ENV['HASH_TYPE'], $password);
-        if ($hashed_user_given === trim($_ENV['HASH_USER']) && $hashed_pass_given === trim($_ENV['HASH_PASSWORD'])) {
+    function login(string $username, string $password) : bool {
+        $hashed_pass_given = password_hash($password, PASSWORD_BCRYPT);
+
+        if ($username === trim($_ENV['USERNAME']) && password_verify(trim($_ENV['PASSWORD']), $hashed_pass_given)) {
             $_SESSION['username'] = $username;
             $_SESSION['valid'] = true;
             $_SESSION['timeout'] = time();
             return true;
         }
+
         return false;
     }
 
-    function is_post_request(): bool {
+    function is_post_request() : bool {
         return $_SERVER['REQUEST_METHOD'] === 'POST';
     }
 ?>
