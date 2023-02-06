@@ -9,7 +9,7 @@ $mail = new PHPMailer(true);
 
 $request = json_decode(file_get_contents('php://input'));
 
-$subject = "Novo Registo e/ou Pedido de Peças";
+$subject = "Registo e/ou Pedido de Peças - " . $request[0]->user;
 
 $body = "<html>";
 $body .= "<head>";
@@ -19,7 +19,7 @@ $body .= "td,th{border:1px solid #dddddd;padding:8px;text-align:left;}";
 $body .= "</style>";
 $body .= "</head>";
 $body .= "<body>";
-$body .= "Abaixo encontra-se a tabela das peças registadas e/ou pedidas pela o colaborador <b>" . $request[0]->user . "</b>.";
+$body .= "Abaixo encontra-se a tabela das peças registadas e/ou pedidas pelo(a) colaborador(a) <b>" . $request[0]->user . "</b>.";
 $body .= "</br></br>";
 $body .= "<table style='border-collapse: collapse;'>";
 $body .= "<thead>";

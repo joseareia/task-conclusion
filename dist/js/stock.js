@@ -2,17 +2,28 @@ $(document).ready(function() {
     const parts = [];
     const table = document.getElementById("table-body");
 
-    $('#adicionar-peca').click(function() {
-        let reference = $('#reference').val();
-        let quantity = $('#quantity').val();
-        let part_type = $('#pedido_peca').find(":selected").val();
-        let or = $('#or_peca').val();
-        let license_plate = $('#matricula_peca').val();
-        let observations = $('#obs').val();
-        let user = $('#colaborador-peca').find(":selected").val();
+    // Input fields
+    const reference_input = $('#reference');
+    const quantity_input = $('#quantity');
+    const part_type_input = $('#pedido_peca');
+    const or_input = $('#or_peca');
+    const license_plate_input = $('#matricula_peca');
+    const observations_input = $('#obs');
+    const user_input = $('#colaborador_peca');
 
-        if (!reference || !quantity || !part_type || !) return;
-        if ((part_type === "OSV" && !or) || (part_type === "Matrícula" && !license_plate)) return;
+    const required_inputs = [reference_input, quantity_input];
+
+    $('#adicionar-peca').click(function() {
+        let reference = reference_input.val();
+        let quantity = quantity_input.val();
+        let part_type = part_type_input.find(":selected").val();
+        let or = or_input.val();
+        let license_plate = license_plate_input.val();
+        let observations = observations_input.val();
+        let user = user_input.find(":selected").val();
+
+        // Input validations - True if an error has found
+        if(validateInputs()) return;
 
         // Push the new information as JSON to the array of parts
         let parts_info = {
@@ -27,7 +38,7 @@ $(document).ready(function() {
         parts.push(parts_info);
 
         // Clears empty information on the table
-        $('#empty-row').remove();
+        $('#empty-row').addClass("hide");
 
         // Inserts new row with the information
         let row = table.insertRow();
@@ -37,16 +48,16 @@ $(document).ready(function() {
 
         switch (part_type) {
             case "OSV":
-                par_row.innerHTML = pt + ": #" + o;
+                par_row.innerHTML = part_type + ": #" + or;
             break;
             case "Matrícula":
-                par_row.innerHTML = pt + ": " + m;
+                par_row.innerHTML = part_type + ": " + license_plate;
             break;
             default:
-                par_row.innerHTML = pt;
+                par_row.innerHTML = part_type;
         }
 
-        let obs_row = row.insertCell(3); obs_row.innerHTML = !ob ? "-" : ob;
+        let obs_row = row.insertCell(3); obs_row.innerHTML = !observations ? "-" : observations;
         let opt_row = row.insertCell(4); opt_row.innerHTML = "Eliminar"; opt_row.className = "delete-row";
     });
 
@@ -67,14 +78,21 @@ $(document).ready(function() {
         }
     });
 
-    $("#enviar-peca").click(function() {
-        if (p.lenght == 0) return;
+    $("#submitParts").click(function() {
+        if (parts.lenght == 0) return;
         if(confirm("Têm a certeza do envio das peças registadas?")) {
+
+            // Submit button disable and add spinner
+            $('#submitParts').addClass('disabled');
+            $('#submitParts').text(' A enviar...');
+            $('#submitParts').prepend("<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>");
+
+            // Sends array of parts to email
             $.ajax({
                 method: 'POST',
                 url: 'send-parts-mail.php',
                 cache: false,
-                data: JSON.stringify(p),
+                data: JSON.stringify(parts),
                 success: function(data) {
                     let response = JSON.parse(data);
                     if (response['code'] === 200) {
@@ -82,9 +100,77 @@ $(document).ready(function() {
                     } else {
                         alert("Erro no envio do pedido.\nCode: " + response['code'] + "\nInfo: " + response['message']);
                     }
+                    cleanButtonStyle();
+                    parts.splice(0, parts.length);
                     window.location.reload();
                 }
             });
         }
     });
+
+    $(document).on("click", ".delete-row", function() {
+        $(this).parent().remove();
+        if ($("#table-body").find("tr").length == 1) $('#empty-row').removeClass("hide");
+
+        let reference = $(this).parent().children()[0].innerHTML;
+        let part_type = $(this).parent().children()[2].innerHTML;
+
+        parts.forEach((i) => { if(i.reference === reference && i.part_type === part_type) parts.splice(parts.indexOf(i), 1) });
+    });
+
+    $("#stock-parts").on("keyup change", ".form-control.is-invalid", function() {
+        if ($(this).val().length > 0) {
+            $(this).removeClass('is-invalid').addClass('is-valid');
+            $(this).next().css('display', 'none');
+        }
+    });
+
+    $("#stock-parts").on("keyup change", ".form-control.is-valid", function() {
+        if ($(this).val().length == 0) {
+            $(this).removeClass('is-valid').addClass('is-invalid');
+            $(this).next().css('display', 'block');
+        }
+    });
+
+    $("#stock-parts").on("change", ".form-select.is-invalid", function() {
+        $(this).removeClass('is-invalid').addClass('is-valid');
+        $(this).next().css('display', 'none');
+    });
+
+    const cleanButtonStyle = () => {
+        $('#submitParts').removeClass('disabled');
+        $('#submitParts').text('Enviar');
+        $('.spinner-border').remove();
+    }
+
+    const validateInputs = () => {
+        let error = false;
+
+        // Required inputs
+        required_inputs.forEach((i) => { if (!i.val()) error = errorHandler(i); });
+
+        // Other selects
+        if (part_type_input.find(":selected").val()) {
+            switch (part_type_input.val()) {
+                case 'OSV':
+                    if(!or_input.val()) error = errorHandler(or_input);
+                    break;
+                case 'Matrícula':
+                    if(!license_plate_input) error = errorHandler(license_plate_input);
+                    break;
+            }
+        } else {
+            error = errorHandler(part_type_input);
+        }
+
+        if (!user_input.find(":selected").val()) error = errorHandler(user_input);
+
+        return error;
+    }
+
+    const errorHandler = (o) => {
+        o.addClass('is-invalid');
+        o.next().css('display', 'block');
+        return true;
+    }
 });

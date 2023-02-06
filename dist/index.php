@@ -10,9 +10,13 @@ require_login();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Meiricarro | Registo Conclusão de Tarefas</title>
     <style media="screen">
-    .container {
-        max-width: 960px;
-    }
+    .container { max-width: 960px; }
+
+    .hide { display: none; }
+
+    td { word-wrap: break-word; }
+
+    table { table-layout: fixed; }
 
     .bd-placeholder-img {
         font-size: 1.125rem;
@@ -102,13 +106,13 @@ require_login();
                 </div>
             </div>
 
-            <div class="row g-5 mt-3">
+            <div class="row g-5 mt-3" id="stock-parts">
                 <div class="col-md-12 col-lg-12">
                     <h4 class="mb-4 fw-bold">Registo e/ou pedido de peças</h4>
                     <div class="row g-3">
                         <div class="col-md-4">
-                            <label for="colaborador-peca" class="form-label">Colaborador</label>
-                            <select class="form-select" id="colaborador-peca" required name="colaborador-peca">
+                            <label for="colaborador_peca" class="form-label">Colaborador</label>
+                            <select class="form-select" id="colaborador_peca" required name="colaborador_peca">
                                 <option value="" hidden selected disabled>Escolha um colaborador...</option>
                                 <option value="Carlos">Carlos</option>
                                 <option value="Eunice">Eunice</option>
@@ -130,21 +134,21 @@ require_login();
                                 <option value="Matrícula">Matrícula</option>
                                 <option value="Stock">Stock</option>
                             </select>
-                            <div class="invalid-feedback invalid-pecas">
+                            <div class="invalid-feedback">
                                 Por favor, escolha uma opção.
                             </div>
                         </div>
                         <div class="col-md-4" id="osv_peca_div">
                             <label for="or_peca" class="form-label">Ordem de serviço</label>
                             <input type="or_peca" class="form-control" id="or_peca" placeholder="00000" name="or_peca" pattern="^[\d]{1,10}">
-                            <div class="invalid-feedback invalid-pecas">
+                            <div class="invalid-feedback">
                                 Por favor, insira uma ordem de serviço válida.
                             </div>
                         </div>
                         <div class="col-md-4" id="matricula_peca_div">
                             <label for="matricula_peca" class="form-label">Matrícula</label>
                             <input type="matricula_peca" class="form-control text-uppercase" id="matricula_peca" placeholder="AA-00-AA" required name="matricula_peca">
-                            <div class="invalid-feedback invalid-pecas">
+                            <div class="invalid-feedback">
                                 Por favor, insira uma matrícula válida.
                             </div>
                         </div>
@@ -154,28 +158,28 @@ require_login();
                         <div class="col-md-4">
                             <label for="reference" class="form-label">Referência / Descrição</label>
                             <input type="reference" class="form-control" id="reference" placeholder="Insira uma referência ou descrição..." name="reference">
-                            <div class="invalid-feedback invalid-pecas">
+                            <div class="invalid-feedback">
                                 Por favor, insira uma referência ou descrição válida.
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="quantity" class="form-label">Quantidade</label>
                             <input type="quantity" class="form-control" id="quantity" placeholder="Insira uma quantidade..." name="quantity">
-                            <div class="invalid-feedback invalid-pecas">
+                            <div class="invalid-feedback">
                                 Por favor, insira uma quantidade válida.
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="obs" class="form-label">Observações</label>
                             <input type="obs" class="form-control" id="obs" placeholder="Insira uma observação..." name="obs">
-                            <div class="invalid-feedback invalid-pecas">
+                            <div class="invalid-feedback">
                                 Por favor, insira uma observação válida.
                             </div>
                         </div>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button class="btn btn-link me-md-1" type="button" style="color:gray;" id="resetBtn">Limpar</button>
+                            <button class="btn btn-link me-md-1" type="button" style="color:gray;" id="resetBtn">Limpar Campos</button>
                             <button class="btn btn-secondary" type="button" name="button" id="adicionar-peca">Adicionar Peça</button>
-                            <button class="btn btn-primary" type="button" name="button" id="enviar-peca">Enviar Pedido</button>
+                            <button class="btn btn-primary" type="button" name="button" id="submitParts">Enviar Pedido</button>
                         </div>
                     </div>
 
