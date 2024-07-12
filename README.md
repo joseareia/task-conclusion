@@ -52,10 +52,10 @@ server {
 ### TODO
 
 - Error handling in the login system
-- AJAX "async:false" with success callback and form clean
+- ~~AJAX "async:false" with success callback and form clean~~
 - ~~Apply regex verifications on the text inputs~~
-- Overall appearance of the application
-- Appearance of the e-mail template
+- ~~Overall appearance of the application~~
+- ~~Appearance of the e-mail template~~
 
 ### License
 
