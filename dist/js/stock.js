@@ -100,13 +100,26 @@ $(document).ready(function() {
                     } else {
                         alert("Erro no envio do pedido.\nCode: " + response['code'] + "\nInfo: " + response['message']);
                     }
-                    cleanButtonStyle();
-                    parts.splice(0, parts.length);
-                    window.location.reload();
+                    clean();
+                    // window.location.reload();
                 }
             });
         }
     });
+
+    function clean() {
+        cleanButtonStyle();
+        parts.splice(0, parts.length);
+        reference_input.val('');
+        quantity_input.val('');
+        part_type_input.val('');
+        or_input.val('');
+        license_plate_input.val('');
+        observations_input.val('');
+        user_input.val('');
+        $("#table-body tr:not(#empty-row)").remove();
+        if ($("#table-body").find("tr").length == 1) $('#empty-row').removeClass("hide");
+    }
 
     $(document).on("click", ".delete-row", function() {
         $(this).parent().remove();

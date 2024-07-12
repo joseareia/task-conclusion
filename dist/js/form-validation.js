@@ -25,7 +25,7 @@ $(document).ready(function() {
                                 alert("Erro no envio do registo.\nCode: " + response['code'] + "\nInfo: " + response['message']);
                             }
                             clean();
-                            window.location.reload();
+                            // window.location.reload();
                         }
                     });
                 }
