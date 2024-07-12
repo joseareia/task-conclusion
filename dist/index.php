@@ -8,7 +8,7 @@ require_login();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Meiricarro | Registo Conclusão de Tarefas</title>
+    <title>Meiricarro - Registo Conclusão de Tarefas</title>
     <style media="screen">
     .container { max-width: 960px; }
 
@@ -36,6 +36,20 @@ require_login();
         display: none;
     }
 
+    ::placeholder {
+        color: #d7d7d7 !important;
+        opacity: 1;
+    }
+
+    ::-ms-input-placeholder {
+        color: #d7d7d7 !important;
+    }
+
+    button {
+        font-size: 14.5px !important;
+        padding: 0.575rem 0.95rem !important
+    }
+
     @media (min-width: 768px) {
         .bd-placeholder-img-lg {
             font-size: 3.5rem;
@@ -44,7 +58,7 @@ require_login();
     </style>
 </head>
 <body class="bg-light">
-    <main class="form-register" style="margin-top:9rem;">
+    <main class="form-register" style="margin-top:7rem;">
         <div class="container">
             <div class="row g-5">
                 <div class="col-md-12 col-lg-12">
@@ -99,7 +113,7 @@ require_login();
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button class="btn btn-link me-md-1" type="reset" style="color:gray;" id="resetBtn">Cancelar</button>
-                                <button class="btn btn-primary" type="submit" id="submitBtn">Enviar</button>
+                                <button class="btn btn-primary" type="submit" id="submitBtn">Enviar Registo</button>
                             </div>
                         </form>
                     </div>
@@ -116,11 +130,10 @@ require_login();
                                 <option value="" hidden selected disabled>Escolha um colaborador...</option>
                                 <option value="Carlos">Carlos</option>
                                 <option value="Eunice">Eunice</option>
+                                <option value="Felipe">Felipe</option>
                                 <option value="João">João</option>
                                 <option value="Mauro">Mauro</option>
-                                <option value="Leandro">Leandro</option>
-                                <option value="Luis">Luis</option>
-                                <option value="Tânia">Tânia</option>
+                                <option value="Tiago">Tiago</option>
                             </select>
                             <div class="invalid-feedback">
                                 Por favor, escolha uma opção.
@@ -177,9 +190,8 @@ require_login();
                             </div>
                         </div>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button class="btn btn-link me-md-1" type="button" style="color:gray;" id="resetBtn">Limpar Campos</button>
+                            <button class="btn btn-link me-md-1" type="button" style="color:gray;" id="reset-pecas">Limpar Campos</button>
                             <button class="btn btn-secondary" type="button" name="button" id="adicionar-peca">Adicionar Peça</button>
-                            <button class="btn btn-primary" type="button" name="button" id="submitParts">Enviar Pedido</button>
                         </div>
                     </div>
 
@@ -202,6 +214,9 @@ require_login();
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-primary" type="button" name="button" id="submitParts">Enviar Pedido</button>
                         </div>
                     </div>
                 </div>
