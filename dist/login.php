@@ -17,7 +17,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Meiricarro | Iniciar Sessão</title>
+        <title>Meiricarro - Iniciar Sessão</title>
         <link href="css/login.css" rel="stylesheet">
         <style>
             .bd-placeholder-img {
