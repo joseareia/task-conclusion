@@ -1,6 +1,9 @@
 <?php
 require __DIR__ . '/app.php';
 require_login();
+
+$colaboradores = get_colaboradores();
+$tarefas = get_tarefas();
 ?>
 
 <!DOCTYPE html>
@@ -62,20 +65,21 @@ require_login();
         <div class="container">
             <div class="row g-5">
                 <div class="col-md-12 col-lg-12">
-                    <h4 class="mb-4 fw-bold">Registo de conclusão de tarefas</h4>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="fw-bold mb-0">Registo de conclusão de tarefas</h4>
+                        <?php if (is_admin()): ?>
+                            <a href="admin.php" class="btn btn-sm btn-outline-secondary">Gerir Colaboradores/Tarefas</a>
+                        <?php endif; ?>
+                    </div>
                     <form class="needs-validation" novalidate method="POST" id="form">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="colaborador" class="form-label">Colaborador</label>
                                 <select class="form-select" id="colaborador" required name="colaborador">
                                     <option value="" hidden selected disabled>Escolha um colaborador...</option>
-                                    <option value="Carlos">Carlos</option>
-                                    <option value="Eunice">Eunice</option>
-                                    <option value="João">João</option>
-                                    <option value="Mauro">Mauro</option>
-                                    <option value="Leandro">Leandro</option>
-                                    <option value="Luis">Luis</option>
-                                    <option value="Tânia">Tânia</option>
+                                    <?php foreach ($colaboradores as $colaborador): ?>
+                                        <option value="<?php echo htmlspecialchars($colaborador); ?>"><?php echo htmlspecialchars($colaborador); ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                                 <div class="invalid-feedback">
                                     Por favor, escolha uma opção.
@@ -86,9 +90,9 @@ require_login();
                                 <label for="tarefa" class="form-label">Tarefa</label>
                                 <select class="form-select" id="tarefa" required name="tarefa">
                                     <option value="" hidden disabled selected>Escolha uma tarefa...</option>
-                                    <option value="Intervenções Técnicas">Intervenções Técnicas</option>
-                                    <option value="Lavagem">Lavagem</option>
-                                    <option value="Inspeção">Inspeção</option>
+                                    <?php foreach ($tarefas as $tarefa): ?>
+                                        <option value="<?php echo htmlspecialchars($tarefa); ?>"><?php echo htmlspecialchars($tarefa); ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                                 <div class="invalid-feedback">
                                     Por favor, escolha uma opção.
@@ -128,12 +132,9 @@ require_login();
                             <label for="colaborador_peca" class="form-label">Colaborador</label>
                             <select class="form-select" id="colaborador_peca" required name="colaborador_peca">
                                 <option value="" hidden selected disabled>Escolha um colaborador...</option>
-                                <option value="Carlos">Carlos</option>
-                                <option value="Eunice">Eunice</option>
-                                <option value="Felipe">Felipe</option>
-                                <option value="João">João</option>
-                                <option value="Mauro">Mauro</option>
-                                <option value="Tiago">Tiago</option>
+                                <?php foreach ($colaboradores as $colaborador): ?>
+                                    <option value="<?php echo htmlspecialchars($colaborador); ?>"><?php echo htmlspecialchars($colaborador); ?></option>
+                                <?php endforeach; ?>
                             </select>
                             <div class="invalid-feedback">
                                 Por favor, escolha uma opção.

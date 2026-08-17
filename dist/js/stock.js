@@ -79,7 +79,7 @@ $(document).ready(function() {
     });
 
     $("#submitParts").click(function() {
-        if (parts.lenght == 0) return;
+        if (parts.length == 0) return;
         if(confirm("Têm a certeza do envio das peças registadas?")) {
 
             // Submit button disable and add spinner

@@ -1,5 +1,6 @@
 <?php
 require 'app.php';
+require_login();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -9,7 +10,9 @@ $mail = new PHPMailer(true);
 
 $request = json_decode(file_get_contents('php://input'));
 
-$subject = "Registo e/ou Pedido de Peças - " . $request[0]->user;
+$user = htmlspecialchars($request[0]->user ?? '');
+
+$subject = "Registo e/ou Pedido de Peças - " . $user;
 
 $body = "<html>";
 $body .= "<head>";
@@ -19,7 +22,7 @@ $body .= "td,th{border:1px solid #dddddd;padding:8px;text-align:left;}";
 $body .= "</style>";
 $body .= "</head>";
 $body .= "<body>";
-$body .= "Abaixo encontra-se a tabela das peças registadas e/ou pedidas pelo(a) colaborador(a) <b>" . $request[0]->user . "</b>.";
+$body .= "Abaixo encontra-se a tabela das peças registadas e/ou pedidas pelo(a) colaborador(a) <b>" . $user . "</b>.";
 $body .= "</br></br>";
 $body .= "<table style='border-collapse: collapse;'>";
 $body .= "<thead>";
@@ -32,23 +35,30 @@ $body .= "</tr>";
 $body .= "</thead>";
 $body .= "<tbody>";
 foreach ($request as $p) {
-    $body .= "<tr>";
-    $body .= "<td>" . $p->reference . "</td>";
-    $body .= "<td>" . $p->quantity . "</td>";
+    $reference = htmlspecialchars($p->reference ?? '');
+    $quantity = htmlspecialchars($p->quantity ?? '');
+    $part_type = htmlspecialchars($p->part_type ?? '');
+    $or = htmlspecialchars($p->or ?? '');
+    $license_plate = htmlspecialchars($p->license_plate ?? '');
+    $obs = htmlspecialchars($p->obs ?? '');
 
-    switch ($p->part_type) {
+    $body .= "<tr>";
+    $body .= "<td>" . $reference . "</td>";
+    $body .= "<td>" . $quantity . "</td>";
+
+    switch ($part_type) {
         case 'OSV':
-            $body .= "<td>" . $p->part_type . ": #" . $p->or . "</td>";
+            $body .= "<td>" . $part_type . ": #" . $or . "</td>";
         break;
         case 'Matrícula':
-            $body .= "<td>" . $p->part_type . ": " . $p->license_plate . "</td>";
+            $body .= "<td>" . $part_type . ": " . $license_plate . "</td>";
         break;
         default:
-            $body .= "<td>" . $p->part_type . "</td>";
+            $body .= "<td>" . $part_type . "</td>";
     }
 
-    if (isset($p->obs) && $p->obs !== '') {
-        $body .= "<td>" . $p->obs . "</td>";
+    if ($obs !== '') {
+        $body .= "<td>" . $obs . "</td>";
     } else {
         $body .= "<td> - </td>";
     }

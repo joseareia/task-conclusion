@@ -1,5 +1,6 @@
 <?php
 require 'app.php';
+require_login();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -7,8 +8,13 @@ use PHPMailer\PHPMailer\Exception;
 
 $mail = new PHPMailer(true);
 
-$subject = $_POST['tarefa']." concluída(os) - OSV ".$_POST['or']." Viatura ".$_POST['matricula'];
-$body = "A Tarefa <b>".$_POST['tarefa']."</b> da OSV <b>".$_POST['or']."</b> da Viatura <b>".$_POST['matricula']."</b> foi concluída por <b>".$_POST['colaborador']."</b>.";
+$tarefa = htmlspecialchars($_POST['tarefa'] ?? '');
+$or = htmlspecialchars($_POST['or'] ?? '');
+$matricula = htmlspecialchars($_POST['matricula'] ?? '');
+$colaborador = htmlspecialchars($_POST['colaborador'] ?? '');
+
+$subject = $tarefa." concluída(os) - OSV ".$or." Viatura ".$matricula;
+$body = "A Tarefa <b>".$tarefa."</b> da OSV <b>".$or."</b> da Viatura <b>".$matricula."</b> foi concluída por <b>".$colaborador."</b>.";
 
 $response = array();
 
