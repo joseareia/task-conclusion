@@ -4,7 +4,7 @@ module.exports = {
     mode: 'none',
     entry: './src/app.js',
     output: {
-        filename: 'main.js',
+        filename: 'vendor.js',
         path: path.resolve(__dirname, 'dist/js'),
     },
     module: {

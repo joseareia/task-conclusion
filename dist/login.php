@@ -67,5 +67,6 @@
               </ul>
           </footer>
       </body>
+      <script src="js/vendor.js"></script>
       <script src="js/main.js"></script>
 </html>
