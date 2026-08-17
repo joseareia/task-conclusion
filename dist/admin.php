@@ -40,8 +40,22 @@ $tarefas = get_tarefas();
     <style media="screen">
     .container { max-width: 720px; }
 
-    .delete-btn {
-        cursor: pointer;
+    ::placeholder {
+        color: #d7d7d7 !important;
+        opacity: 1;
+    }
+
+    ::-ms-input-placeholder {
+        color: #d7d7d7 !important;
+    }
+
+    button {
+        font-size: 14.5px !important;
+        padding: 0.575rem 0.95rem !important
+    }
+
+    .list-group-item {
+        font-size: 0.95rem;
     }
     </style>
 </head>
@@ -107,4 +121,5 @@ $tarefas = get_tarefas();
         </div>
     </main>
 </body>
+<script src="js/vendor.js"></script>
 </html>
